@@ -1,0 +1,21 @@
+version: '3'
+services:
+    mysql:
+        build:
+            context: ./mysql
+        volumes:
+            - "/var/lib/project_data/mysql:/var/lib/mysql/"
+        container_name: event-mysql
+        privileged: true
+
+    webapp-app:
+        build:
+            context: ./webapp
+        volumes:
+            - "../../app/:/var/www/html/"
+            - "./webapp/files/event.conf:/etc/apache2/sites-available/event.conf"
+            - "./webapp/files/opcache.ini:/etc/php/8.0/mods-available/opcache.ini"
+        container_name: event-app
+        privileged: true
+        ports:
+            - "8040:80"
