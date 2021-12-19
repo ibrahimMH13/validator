@@ -1,0 +1,15 @@
+{
+    "name": "ibrhaim13/validator",
+    "autoload": {
+        "psr-4": {
+            "ibrhaim13\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ibrahim I. I. Musabeh",
+            "email": "i.musabah92@gmail.com"
+        }
+    ],
+    "require": {}
+}
