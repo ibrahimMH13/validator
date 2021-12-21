@@ -26,12 +26,14 @@ class Validator
         $this->roles = $roles;
     }
 
-    public function validate(){
+    public function validate(): bool
+    {
         foreach ($this->roles as $filed => $roles){
             foreach ($roles as $role){
                 $this->validateRule($filed,$role);
             }
         }
+        return $this->errors->hasErrors();
     }
 
     private function validateRule(string $filed,Rule $role)

@@ -24,4 +24,4 @@ $validator->setRules([
     ],
 ]);
 $validator->validate();
-dd($validator->errors());
+dd($validator->validate());

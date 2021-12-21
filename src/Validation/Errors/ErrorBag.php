@@ -10,6 +10,10 @@ class ErrorBag
         $this->errors[$key][] = $message;
     }
 
+    public function hasErrors(): bool
+    {
+        return empty($this->errors);
+    }
     public function getErrors(): array
     {
         return $this->errors;
