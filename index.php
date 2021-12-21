@@ -1,7 +1,9 @@
 <?php
 
 
+use ibrhaim13\Validation\Rules\BetweenRule;
 use ibrhaim13\Validation\Rules\EmailRule;
+use ibrhaim13\Validation\Rules\MaxRule;
 use ibrhaim13\Validation\Rules\RequiredRule;
 use ibrhaim13\Validation\Validator;
 function dd($data){
@@ -11,17 +13,15 @@ function dd($data){
 require_once 'vendor/autoload.php';
 
 $validator = new Validator([
-    'name'=>'',
-    'email'=>'',
+    'name'=>'yyjjji',
+    'email'=>'a@a.com',
 ]);
 $validator->setRules([
-    'name'=>[
-        new RequiredRule
-    ],
-    'email'=>[
-        new RequiredRule,
-        new EmailRule,
-    ],
-]);
+    'name'=> array(
+        'required',
+        'between:5,10'
+     ),
+ ]);
 $validator->validate();
-dd($validator->validate());
+
+dump($validator->validate(),$validator->errors());
