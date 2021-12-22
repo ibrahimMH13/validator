@@ -15,6 +15,7 @@ class Validator
      */
     private  $roles = [];
     protected $errors;
+    private   $aliases;
 
     public function __construct(array $data)
     {
@@ -27,6 +28,9 @@ class Validator
         $this->roles = $roles;
     }
 
+    public function setAliases(array $aliases){
+        $this->aliases = $aliases;
+    }
     public function validate(): bool
     {
         foreach ($this->roles as $filed => $roles) {
@@ -40,7 +44,7 @@ class Validator
     private function validateRule(string $filed,Rule $role)
     {
        if (!$role->passes($filed,$this->getFiledValue($filed,$this->data))){
-         $this->errors->add($filed,$role->message($filed));
+         $this->errors->add($filed,$role->message($this->alias($filed)));
        }
     }
 
@@ -51,6 +55,10 @@ class Validator
     public function errors(): array
     {
       return  $this->errors->getErrors();
+    }
+
+    protected function alias($filed){
+      return  $this->aliases[$filed]??$filed;
     }
 
     private function resolveRule($roles)
