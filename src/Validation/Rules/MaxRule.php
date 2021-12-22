@@ -13,7 +13,7 @@ class MaxRule implements Rule
         $this->max = $max;
     }
 
-    public function passes(string $filed, $value): bool
+    public function passes(string $filed, $value,$otherData=[]): bool
     {
          return strlen($value) <= $this->max;
     }

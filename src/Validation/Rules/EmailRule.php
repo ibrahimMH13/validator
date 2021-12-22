@@ -5,7 +5,7 @@ use ibrhaim13\Contract\Rule;
 class EmailRule implements Rule
 {
 
-    public function passes(string $filed, $value): bool
+    public function passes(string $filed, $value,$otherData=[]): bool
     {
         return filter_var($value,FILTER_VALIDATE_EMAIL);
     }

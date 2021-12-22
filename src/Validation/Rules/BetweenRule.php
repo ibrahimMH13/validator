@@ -15,7 +15,7 @@ class BetweenRule implements Rule
          $this->upper = $upper;
     }
 
-    public function passes(string $filed, $value): bool
+    public function passes(string $filed, $value,$otherData=[]): bool
     {
         $length = strlen($value);
          return ($length > $this->lower) && ($length < $this->upper);

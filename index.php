@@ -13,17 +13,18 @@ function dd($data){
 require_once 'vendor/autoload.php';
 
 $validator = new Validator([
-    'first_name'=>' ',
-    'email'=>'a@a.com',
+    'first_name'=>'',
+    'middle_name'=>'',
+    'last_name'=>'',
 ]);
 $validator->setRules([
-    'first_name'=> array(
-        'required',
-        'between:5,10'
-     ),
+    'first_name'=> ['required'],
+    'last_name'=> ['requiredWith:first_name,middle_name'],
  ]);
 $validator->setAliases([
-    'first_name' =>'first name'
+    'first_name'=>'first name',
+    'last_name'=>'last name',
+    'middle_name'=>'middle name',
 ]);
 dump($validator->validate());
 dump($validator->errors());

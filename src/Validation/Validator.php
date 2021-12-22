@@ -15,7 +15,7 @@ class Validator
      */
     private  $roles = [];
     protected $errors;
-    private   $aliases;
+    private  static $aliases;
 
     public function __construct(array $data)
     {
@@ -29,7 +29,7 @@ class Validator
     }
 
     public function setAliases(array $aliases){
-        $this->aliases = $aliases;
+        self::$aliases = $aliases;
     }
     public function validate(): bool
     {
@@ -43,8 +43,8 @@ class Validator
 
     private function validateRule(string $filed,Rule $role)
     {
-       if (!$role->passes($filed,$this->getFiledValue($filed,$this->data))){
-         $this->errors->add($filed,$role->message($this->alias($filed)));
+       if (!$role->passes($filed,$this->getFiledValue($filed,$this->data),$this->data)){
+         $this->errors->add($filed,$role->message(self::alias($filed)));
        }
     }
 
@@ -57,8 +57,13 @@ class Validator
       return  $this->errors->getErrors();
     }
 
-    protected function alias($filed){
-      return  $this->aliases[$filed]??$filed;
+    public static function alias($filed){
+      return  self::$aliases[$filed]??$filed;
+    }
+    public static function aliases(array $fileds){
+     return array_map(function ($filed){
+         return self::alias($filed);
+     },$fileds);
     }
 
     private function resolveRule($roles)
