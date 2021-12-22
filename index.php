@@ -22,6 +22,4 @@ $validator->setRules([
         'between:5,10'
      ),
  ]);
-$validator->validate();
-
-dump($validator->validate(),$validator->errors());
+dump($validator->validate());
